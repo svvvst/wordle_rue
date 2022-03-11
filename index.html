@@ -5,12 +5,6 @@
     <title></title>
     <link href="style.css" rel="stylesheet" />
     <style id="style">
-      :root {
-        --color-right: rgb(41, 168, 37);
-        --color-wrong: rgb(236, 53, 53);
-        --color-swap: rgb(255, 230, 116);
-      }
-
       * {font-family:'SF Pro Text',Verdana,Roboto,'Open Sans',Arial,sans-serif;}
 
       body{width:100%;}
@@ -25,12 +19,17 @@
         margin-top:20px;
       }
 
+      div.guess{
+        margin-top:10px;
+        margin-bottom:10px;
+      }
+
       input{
         height:3.5vh;
         width:31.25vh;
       }
 
-      button{
+      button.guess{
         height:3.5vh;
         width:3.5vh;
         line-height:0;
@@ -41,12 +40,12 @@
         border:0px;
       }
 
-      button:hover{
+      #button.guess:hover{
         background-color:rgb(121, 181, 238);
         cursor:pointer;
       }
 
-      input, td, button {
+      input, td, button.guess {
         font-size:3vh;
         font-weight:bold;
         text-align: center;
@@ -82,10 +81,13 @@
     </style>
   </head>
   <body>
-    <h1>Вордел</h1>
-    <script src="main.js"></script>
-  
-    <div><input id="inputStr"></input> <button onclick="submitGuess()">✔</button></div>
+    <div id="container">
+      <h1>Вордел</h1>
+      <script src="main.js"></script>
+    
+      <div class="guess"><input class=guess id="inputStr"></input> <button class=guess onclick="submitGuess()">✔</button></div>
+      <button id=share onclick="share(newGame)">Share with Clipboard</button>
+    </div>
   </body>
 </html>
 

@@ -1,5 +1,3 @@
-//// <reference path='https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js' />
-
 var style = document.getElementById('style');
 
 class Word {
@@ -7,29 +5,27 @@ class Word {
     map = new Map();
 
     constructor(inputString) {
-      this.str = inputString;
-      this.wordToHash();
+        this.str = inputString;
+        this.wordToHash();
     }
 
-    wordToHash(){
-        for (let i = 0; i < this.str.length; i++){
+    wordToHash() {
+        for (let i = 0; i < this.str.length; i++) {
 
             var k = this.str[i];
 
             //check if letter key already exists
-            if (this.map.hasOwnProperty(k))
-            {
+            if (this.map.hasOwnProperty(k)) {
                 //add index 
                 this.map[k][i] = true;
-            }
-            else // add letter
+            } else // add letter
             {
                 this.map.set(k, new Map());
-                this.map.get(k).set(i,true)
+                this.map.get(k).set(i, true)
             }
         }
     }
-  }
+}
 
 class Board {
     len;
@@ -38,7 +34,25 @@ class Board {
 
     table;
 
-    constructor(inWordStr,guessInt){
+    boardContent = '';
+    contentBool;
+
+    colorRight;
+    colorWrong;
+    colorSwap;
+
+    constructor(inWordStr, guessInt) {
+
+        this.colorRight = 'rgb(41, 168, 37)'
+        this.colorWrong = 'rgb(236, 53, 53)'
+        this.colorSwap = 'rgb(255, 230, 116)'
+
+        let colorsStr = ':root {\n--color-right: ' + this.colorRight +
+                          ';\n--color-wrong: '     + this.colorWrong +
+                          ';\n--color-swap: '      + this.colorSwap  +
+                          ';\n}'
+
+        style.innerText = colorsStr+style.innerText;
 
         //create gameplay grid in html
         this.len = inWordStr.length;
@@ -46,49 +60,60 @@ class Board {
 
         this.table = document.createElement("table");
         this.table.id = 'board'
-        document.body.appendChild(this.table)
+        document.getElementById('container').appendChild(this.table)
 
         var row = document.createElement("tr")
         var elm;
-        for (let i = 0; i < this.len; i++){
+        for (let i = 0; i < this.len; i++) {
             elm = document.createElement("td")
-            elm.className = 'c'+i
+            elm.className = 'cell c' + i
             row.appendChild(elm)
         }
 
         this.table.appendChild(row)
-        for (let i = 1; i < this.hgt ; i++){
+        for (let i = 1; i < this.hgt; i++) {
             elm = row.cloneNode(true)
-            elm.className = 'r'+i
+            elm.className = 'r' + i
             this.table.appendChild(elm)
         }
         row.className = 'r0'
     }
 
-    addGuess(inputStr,round){
-        for (let i = 0; i < inputStr.length; i++){
+    addGuess(inputStr, round) {
+        for (let i = 0; i < this.len; i++) {
             this.table.childNodes[round].childNodes[i].innerText = inputStr[i]
         }
     }
 
-    mark(x,y,val){
+    mark(x, y, val) {
         var color;
-        
-        switch(val){
-            case 1: color = 'var(--color-right)';
-            break;
-            case 2: color = 'var(--color-swap)';
-            break;
-            default: color = 'var(--color-wrong)';
-            break;
+
+        switch (val) {
+            case 1:
+                color = 'var(--color-right)';
+                break;
+            case 2:
+                color = 'var(--color-swap)';
+                break;
+            default:
+                color = 'var(--color-wrong)';
+                break;
         }
 
-        if (x == 'row'){
-            style.innerText = style.innerText + ' .r'+ y +' td{background-color:'+ color +' !important;}'
+        if (x == 'row') {
+            style.innerText = style.innerText + ' .r' + y + ' td{background-color:' + color + ' !important;}'
+        } else {
+            style.innerText = style.innerText + ' .r' + x + ' .cell.c' + y + '{background-color:' + color + ';}'
         }
-        else{
-            style.innerText = style.innerText + ' .r'+ x +' .c'+ y +'{background-color:'+ color +';}'
+    }
+
+    content() {
+        if (!(this.boardContent == '')) {
+
+        } else {
+            this.boardContent = document.getElementsByClassName('cell')
         }
+        return this.boardContent;
     }
 }
 
@@ -102,110 +127,107 @@ class Game {
 
     board;
     round;
+    maxRound
 
     gameOver;
-    
-    constructor(inWordStr,maxround){
-        this.round=-1;
+
+    constructor(inWordStr, maxRound) {
+        this.round = -1;
+        this.gameOver = false;
+        this.maxRound = maxRound;
 
         this.answerWord = new Word(inWordStr);
-
-        this.board = new Board(inWordStr,maxround)
-
-        this.gameOver = false;
+        this.board = new Board(inWordStr, maxRound)
     }
 
-    playRound(inputStr){
+    playRound(inputStr) {
         this.round++
-        if (this.debug){
+        if (this.debug) {
             inputStr = ['cactus', 'styles', "engine", 'rhrrhh', 'perohy'][this.round]
         }
 
         this.guessStr = inputStr.toUpperCase() //"test"+this.round //prompt()
 
-        this.board.addGuess(this.guessStr,this.round);
+        this.board.addGuess(this.guessStr, this.round);
         this.checkGuess();
 
-        if (this.round > this.answerWord.str.length){this.lose()}
+        if (this.round > this.maxRound) {
+            this.lose()
+        }
     }
 
-    win(){
+    win() {
         this.endGame()
-        this.board.mark('row',this.round,1);
-        alert('Добре робота!');
+        this.board.mark('row', this.round, 1);
+        alert('Добрi!');
     }
 
-    lose(){
+    lose() {
         this.endGame()
         alert('You lose!');
     }
 
-    endGame(){this.gameOver = true;}
+    endGame() {
+        this.gameOver = true;
+    }
 
-    checkGuess(){
-        console.log(this.guessStr+ ' =============================')
-        
+    checkGuess() {
         let guessMap = new Map();
         let k;
 
         // Game Win
-        if (this.guessStr == this.answerWord.str){
+        if (this.guessStr == this.answerWord.str) {
             this.win()
         }
 
         // Game Continue
-        else{   
-            for (let i=0; i < this.guessStr.length; i++){
+        else {
+            for (let i = 0; i < this.guessStr.length; i++) {
 
                 k = this.guessStr[i];
 
 
                 // check if letter wrong
-                if (!( this.answerWord.map.has(k) )){
+                if (!(this.answerWord.map.has(k))) {
                     this.board.mark(this.round, i, 0);
-                    console.log(i+' wrong');
                 }
 
                 // if letter not wrong
-                else{
+                else {
 
                     // check if letter key in map guess map
-                    if (!guessMap.has(k)){
-                        guessMap.set(k,1);  // create key and set count to 1
+                    if (!guessMap.has(k)) {
+                        guessMap.set(k, 1); // create key and set count to 1
                     }
                     // add letter key if not in guess map
-                    else{
-                        guessMap.set(k,guessMap.get(k)+1);  // add to letter count
+                    else {
+                        guessMap.set(k, guessMap.get(k) + 1); // add to letter count
                     }
-                    
+
                     // check if letter index correct
-                    if (k == this.answerWord.str[i]){
+                    if (k == this.answerWord.str[i]) {
                         this.board.mark(this.round, i, 1);
-                        console.log(k+' right');
                     }
                     // otherwise, set index aside to check against letter count
-                    else{
+                    else {
                         guessMap.set(i, k);
                     }
                 }
 
             }
 
-            console.log(guessMap);
-            
             // for each index in string
             var i = -1;
-            for (let k of this.guessStr){ i++;
+            for (let k of this.guessStr) {
+                i++;
 
                 // if letter exists in map (is neither right/wrong yet)
-                if (guessMap.has(i)){
+                if (guessMap.has(i)) {
                     // and if letter count is less than/equals that in answer
-                    if (guessMap.get(k) <= this.answerWord.map.get(k).size){
+                    if (guessMap.get(k) <= this.answerWord.map.get(k).size) {
                         this.board.mark(this.round, i, 2);
-                        guessMap.set(k,guessMap.get(k)+1);
-                    }
-                    else{
-                        console.log(k+' wrong')
+                        guessMap.set(k, guessMap.get(k) + 1);
+                    } else {
                         this.board.mark(this.round, i, 0);
                     }
                 }
@@ -215,21 +237,51 @@ class Game {
     }
 }
 
-function submitGuess(){
-    if (!newGame.gameOver){
+function submitGuess() {
+    if (!newGame.gameOver) {
         newGame.playRound(document.getElementById('inputStr').value);
     }
 }
 
-newGame = new Game("МАЧКА",7);
 
-var x=0;
+function share(inputGame){//inputGame) {
+    var shareStr = '';
+    var i = -1;
+    var d = new Date
 
-/* 
-testArr.forEach( x => {
-    testGame.playRound(x)
-}); 
-*/
+    for (var el of inputGame.board.content()) {
+        i++
+
+        if ( i % inputGame.board.len == 0){ shareStr = shareStr+'\n'; }
+
+        switch(window.getComputedStyle(el)['background-color']){
+            case inputGame.board.colorRight:
+                shareStr = shareStr + '🟩'
+            break;
+            case inputGame.board.colorWrong:
+                shareStr = shareStr + '🟥'
+            break;
+            case inputGame.board.colorSwap:
+                shareStr = shareStr + '🟨'
+            break;
+            default:
+                shareStr = shareStr + '⬜'
+            break;
+        }
+    }
+
+    shareStr = "Вордел "+[d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()].join('-')+'\n'+shareStr
+
+    navigator.clipboard.writeText(shareStr);
+}
+
+newGame = new Game("СЛОВО", 6);
+
+var x = 0;
+
+
+
+
 
 
 
