@@ -9,7 +9,17 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "file": "${workspaceFolder}/index.html"
+            "file": "${workspaceFolder}/index.html",
+            "pathMappings": [
+                {
+                    "url": "file:///C:/Users/Alexander%20Swyst",
+                    "path": "c:/Users/Alexander Swyst"
+                },
+                {
+                    "url": "file:///C:/Users/Alexander%20Swyst",
+                    "path": "c:/Users/Alexander Swyst"
+                }
+            ]
         },
         {
             "name": "Launch localhost",
@@ -23,6 +33,6 @@
             "name": "Attach",
             "type": "firefox",
             "request": "attach"
-        },
+        }
     ]
 }

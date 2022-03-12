@@ -5,7 +5,7 @@ class Word {
     map = new Map();
 
     constructor(inputString) {
-        this.str = inputString;
+        this.str = inputString.toUpperCase();
         this.wordToHash();
     }
 
@@ -275,7 +275,21 @@ function share(inputGame){//inputGame) {
     navigator.clipboard.writeText(shareStr);
 }
 
-newGame = new Game("СЛОВО", 6);
+var dateStrArr = ['2022211','2022212','2022213','2022214','2022215','2022216','2022217','2022218','2022219','2022220','2022221','2022222','2022223','2022224','2022225','2022226','2022227','2022228','2022229','2022230']
+let d = new Date();
+var today = ''+ d.getUTCFullYear() + (d.getUTCMonth()) + d.getUTCDate();
+var wordArr = ['слово','вельо','знати','руска','білый','меджі','школа','свиня','воьна','днесь','русин','новый','поміч','дякую','прошу','буква','земля','сонце','заход','кухня'];
+var wordMap = new Map();
+
+var i_date = -1;
+for (var date of dateStrArr){
+    i_date++;
+    wordMap.set(date,wordArr[i_date]);
+}
+
+wordToday = wordMap.get(today);
+
+newGame = new Game(wordToday, 6);
 
 var x = 0;
 
