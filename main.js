@@ -15,13 +15,13 @@ class Word {
             var k = this.str[i];
 
             //check if letter key already exists
-            if (this.map.hasOwnProperty(k)) {
+            if (this.map.has(k)) {
                 //add index 
-                this.map[k][i] = true;
+                this.map.get(k).set(i,true);
             } else // add letter
             {
                 this.map.set(k, new Map());
-                this.map.get(k).set(i, true)
+                this.map.get(k).set(i, true);
             }
         }
     }
@@ -173,7 +173,6 @@ class Game {
 
     checkGuess() {
         let guessMap = new Map();
-        let k;
 
         // Game Win
         if (this.guessStr == this.answerWord.str) {
@@ -182,10 +181,10 @@ class Game {
 
         // Game Continue
         else {
+            let k;
             for (let i = 0; i < this.guessStr.length; i++) {
 
                 k = this.guessStr[i];
-
 
                 // check if letter wrong
                 if (!(this.answerWord.map.has(k))) {
@@ -194,39 +193,37 @@ class Game {
 
                 // if letter not wrong
                 else {
-
-                    // check if letter key in map guess map
-                    if (!guessMap.has(k)) {
-                        guessMap.set(k, 1); // create key and set count to 1
-                    }
-                    // add letter key if not in guess map
-                    else {
-                        guessMap.set(k, guessMap.get(k) + 1); // add to letter count
-                    }
-
                     // check if letter index correct
                     if (k == this.answerWord.str[i]) {
                         this.board.mark(this.round, i, 1);
+                        guessMap.set(k, guessMap.get(k)+1);
                     }
-                    // otherwise, set index aside to check against letter count
-                    else {
+                    else { // otherwise,
+
+                        // set index aside to check against letter count
                         guessMap.set(i, k);
+
+                        // if letter key in map guess map
+                        if (!guessMap.has(k)) {
+                            guessMap.set(k, 0); // create key and set count to 1
+                        }
                     }
                 }
-
             }
 
             // for each index in string
             var i = -1;
             for (let k of this.guessStr) {
                 i++;
-
+                
                 // if letter exists in map (is neither right/wrong yet)
                 if (guessMap.has(i)) {
+
+                    guessMap.set(k, guessMap.get(k)+1);
+
                     // and if letter count is less than/equals that in answer
                     if (guessMap.get(k) <= this.answerWord.map.get(k).size) {
                         this.board.mark(this.round, i, 2);
-                        guessMap.set(k, guessMap.get(k) + 1);
                     } else {
                         this.board.mark(this.round, i, 0);
                     }
@@ -242,7 +239,6 @@ function submitGuess() {
         newGame.playRound(document.getElementById('inputStr').value);
     }
 }
-
 
 function share(inputGame){//inputGame) {
     var shareStr = '';
@@ -278,7 +274,7 @@ function share(inputGame){//inputGame) {
 var dateStrArr = ['2022211','2022212','2022213','2022214','2022215','2022216','2022217','2022218','2022219','2022220','2022221','2022222','2022223','2022224','2022225','2022226','2022227','2022228','2022229','2022230']
 let d = new Date();
 var today = ''+ d.getUTCFullYear() + (d.getUTCMonth()) + d.getUTCDate();
-var wordArr = ['слово','вельо','знати','руска','білый','меджі','школа','свиня','воьна','днесь','русин','новый','поміч','дякую','прошу','буква','земля','сонце','заход','кухня'];
+var wordArr = ['','слово','вельо','знати','руска','білый','меджі','школа','свиня','воьна','днесь','русин','новый','поміч','дякую','прошу','буква','земля','сонце','заход','кухня'];
 var wordMap = new Map();
 
 var i_date = -1;
