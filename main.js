@@ -308,7 +308,7 @@ function share(inputGame){
         }
     }
 
-    shareStr = "Вордел "+[d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()].join('-')+'\n'+shareStr
+    shareStr = "Вордел "+[d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate()].join('-')+'\n'+shareStr
 
     navigator.clipboard.writeText(shareStr);
 }
