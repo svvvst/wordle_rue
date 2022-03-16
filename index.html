@@ -26,39 +26,39 @@
       div.guess {
         margin-top: 10px;
         margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0;
+        width: 35.3vh;
       }
 
       input {
         height: 3.5vh;
-        width: 31.25vh;
+        flex: 1 1;
+        width: 200px;
       }
 
-      button.guess {
+      .button.guess {
+        display: block;
         height: 3.5vh;
         width: 3.5vh;
-        line-height: 0;
-
         color: white;
         background-color: rgb(42, 121, 194);
         border-radius: 5px;
         border: 0px;
-      }
-      
-      /* IOS Device Button Fix */
-      @media (pointer: none) or (hover:none){
-        .button.guess{
-          -webkit-appearance:none;
-        }
+        line-height: 120%;
+        flex: 0 0 3.5vh;
       }
 
-      #button.guess:hover {
+      .button.guess:hover {
         background-color: rgb(121, 181, 238);
         cursor: pointer;
       }
 
       input,
       td,
-      button.guess {
+      .button.guess {
         font-size: 3vh;
         font-weight: bold;
         text-align: center;
@@ -70,7 +70,6 @@
         border-collapse: separate;
         border-spacing: 10px;
         border: 1px solid lightgray;
-
       }
 
       td {
@@ -130,7 +129,9 @@
       <h1>Вордел</h1>
       <script src="main.js"></script>
 
-      <div class="guess"><input class=guess id="inputStr"></input> <button class=guess onclick="submitGuess()">✔</button>
+      <div class="guess">
+        <input class=guess id="inputStr"></input>
+        <a class="guess button" onclick="submitGuess()">✔</a>
       </div>
       <button id=share onclick="share(newGame)">Share with Clipboard</button>
     </div>
