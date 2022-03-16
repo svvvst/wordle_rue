@@ -91,19 +91,49 @@
         font-weight: 800;
         width: auto;
       }
-  </style>
-  <script src="matomo.js"></script>
-</head>
 
-<body>
-  <div id="container">
-    <h1>Вордел</h1>
-    <script src="main.js"></script>
+      .github-button:active, .github-button:hover {
+        background-color: white;
+        background-image: none;
+        color: #0080ff;
+      }
+      .github-button:active {
+        background-image: linear-gradient(to bottom, #eaeaea, white) !important;
+        border-color: gray;
+        color: navy !important;
+      }
+      .github-button {
+        display: block;
+        position: absolute;
+        right: 2vw;
+        bottom: 2vw;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+          border-top-color: lightgray;
+          border-right-color: lightgray;
+          border-bottom-color: lightgray;
+          border-left-color: lightgray;
+        padding: 4px 6px;
+        background-color: #f8f8f8;
+        text-decoration: none;
+        background-image: linear-gradient(to top, #eaeaea, white);
+        color: black;
+      }
+      
+    </style>
+    <script src="matomo.js"></script>
+  </head>
 
-    <div class="guess"><input class=guess id="inputStr"></input> <button class=guess onclick="submitGuess()">✔</button>
+  <body>
+    <a class="github-button" href="https://github.com/svvvst/wordle_rue">View on GitHub</a>
+    <div id="container">
+      <h1>Вордел</h1>
+      <script src="main.js"></script>
+
+      <div class="guess"><input class=guess id="inputStr"></input> <button class=guess onclick="submitGuess()">✔</button>
+      </div>
+      <button id=share onclick="share(newGame)">Share with Clipboard</button>
     </div>
-    <button id=share onclick="share(newGame)">Share with Clipboard</button>
-  </div>
-</body>
+  </body>
 
 </html>
