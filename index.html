@@ -9,115 +9,107 @@
   <title>Вордел!</title>
   <link href="style.css" rel="stylesheet" />
   <style id="style">
+      :root {
+      --color-right: rgb(41, 168, 37);
+      --color-wrong: rgb(236, 53, 53);
+      --color-swap: rgb(255, 230, 116);
+      }
       * {
-        font-family: 'SF Pro Text', Verdana, Roboto, 'Open Sans', Arial, sans-serif;
+      font-family: 'SF Pro Text', Verdana, Roboto, 'Open Sans', Arial, sans-serif;
+      font-size: 1.25vh;
       }
-
       body>* {
-        margin-left: auto;
-        margin-right: auto;
+      margin-left: auto;
+      margin-right: auto;
       }
-
       body>div {
-        width: fit-content;
-        margin-top: 20px;
+      width: fit-content;
+      margin-top: 1.5vh;
       }
-
       div.guess {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 0;
-        width: 35.3vh;
+      margin-top: .75vh;
+      margin-bottom: .75vh;
+      display: flex;
+      align-items: center;
+      gap: .72vh;
+      padding: 0;
+      width: auto;
       }
-
       input {
-        height: 3.5vh;
-        flex: 1 1;
-        width: 200px;
+      height: 3.5vh;
+      flex: 1 1;
+      width: 0;
       }
-
       .button.guess {
-        display: block;
-        height: 3.5vh;
-        width: 3.5vh;
-        color: white;
-        background-color: rgb(42, 121, 194);
-        border-radius: 5px;
-        border: 0px;
-        line-height: 120%;
-        flex: 0 0 3.5vh;
+      display: block;
+      height: 3.5vh;
+      width: 3.5vh;
+      color: white;
+      background-color: rgb(42, 121, 194);
+      border-radius: 5px;
+      border: 0px;
+      line-height: 120%;
+      flex: 0 0 3.5vh;
       }
-
       .button.guess:hover {
-        background-color: rgb(121, 181, 238);
-        cursor: pointer;
+      background-color: rgb(121, 181, 238);
+      cursor: pointer;
       }
-
       input,
       td,
       .button.guess {
-        font-size: 3vh;
-        font-weight: bold;
-        text-align: center;
-
-        text-transform: uppercase;
+      font-size: 3vh;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
       }
-
       table {
-        border-collapse: separate;
-        border-spacing: 10px;
-        border: 1px solid lightgray;
+      border-collapse: separate;
+      border-spacing: .75vh;
+      border: 1px solid lightgray;
       }
-
       td {
-        width: 2em;
-        height: 2em;
-
-        background-color: rgb(248, 248, 248);
-
-        border-radius: 3px;
-
-        color: white;
-        text-shadow:
-          0px 0px 20px rgb(122, 115, 46);
+      width: 6vh;
+      height: 6vh;
+      background-color: rgb(248, 248, 248);
+      border-radius: .5vh;
+      color: white;
+      text-shadow: 0px 0px 20px rgb(122, 115, 46);
       }
-
       h1 {
-        font-size: 48px;
-        font-weight: 800;
-        width: auto;
+      font-size: 4vh;
+      font-weight: 800;
+      width: auto;
       }
-
-      .github-button:active, .github-button:hover {
-        background-color: white;
-        background-image: none;
-        color: #0080ff;
+      .github-button:active,
+      .github-button:hover {
+      background-color: white;
+      background-image: none;
+      color: #0080ff;
       }
       .github-button:active {
-        background-image: linear-gradient(to bottom, #eaeaea, white) !important;
-        border-color: gray;
-        color: navy !important;
+      background-image: linear-gradient(to bottom, #eaeaea, white) !important;
+      border-color: gray;
+      color: navy !important;
       }
       .github-button {
-        display: block;
-        position: absolute;
-        right: 2vw;
-        bottom: 2vw;
-        border-radius: 5px;
-        border: 1px solid lightgray;
-          border-top-color: lightgray;
-          border-right-color: lightgray;
-          border-bottom-color: lightgray;
-          border-left-color: lightgray;
-        padding: 4px 6px;
-        background-color: #f8f8f8;
-        text-decoration: none;
-        background-image: linear-gradient(to top, #eaeaea, white);
-        color: black;
+      display: block;
+      position: absolute;
+      right: 2vw;
+      bottom: 2vw;
+      border-radius: 5px;
+      border: 1px solid lightgray;
+      border-top-color: lightgray;
+      border-right-color: lightgray;
+      border-bottom-color: lightgray;
+      border-left-color: lightgray;
+      padding: .3vh .5vh;
+      background-color: #f8f8f8;
+      text-decoration: none;
+      background-image: linear-gradient(to top, #eaeaea, white);
+      color: black;
       }
+
       
     </style>
     <script src="matomo.js"></script>
