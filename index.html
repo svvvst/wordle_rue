@@ -10,6 +10,7 @@
   <!--Disable Zoom on Mobile-->
   <meta name="viewport" content= "width=device-width, user-scalable=no">
   <title>Вордел!</title>
+  <link rel="shortcut icon" type="image/svg" href="favicon.svg"/>
   <link href="style.css" rel="stylesheet" />
   <style id="style">
       :root {
@@ -17,18 +18,22 @@
       --color-wrong: rgb(236, 53, 53);
       --color-swap: rgb(255, 230, 116);
       }
+
       * {
       font-family: 'SF Pro Text', Verdana, Roboto, 'Open Sans', Arial, sans-serif;
       font-size: 1.25vh;
       }
+
       body>* {
       margin-left: auto;
       margin-right: auto;
       }
+
       body>div {
       width: fit-content;
       margin-top: 1.5vh;
       }
+
       div.guess {
       margin-top: .75vh;
       margin-bottom: .75vh;
@@ -38,11 +43,13 @@
       padding: 0;
       width: auto;
       }
+
       input {
       height: 3.5vh;
       flex: 1 1;
       width: 0;
       }
+
       .button.guess {
       display: block;
       height: 3.5vh;
@@ -54,10 +61,12 @@
       line-height: 120%;
       flex: 0 0 3.5vh;
       }
+
       .button.guess:hover {
       background-color: rgb(121, 181, 238);
       cursor: pointer;
       }
+
       input,
       td,
       .button.guess {
@@ -66,11 +75,13 @@
       text-align: center;
       text-transform: uppercase;
       }
+
       table {
       border-collapse: separate;
       border-spacing: .75vh;
       border: 1px solid lightgray;
       }
+
       td {
       width: 6vh;
       height: 6vh;
@@ -79,22 +90,41 @@
       color: white;
       text-shadow: 0px 0px 20px rgb(122, 115, 46);
       }
+
+      #heading-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+      }
+
       h1 {
       font-size: 4vh;
       font-weight: 800;
       width: auto;
       }
+
+      #logo {
+        width: 5em;
+        background-image: url(logo.svg);
+        height: 5em;
+        background-size: 5em;
+        background-repeat: no-repeat;
+      }
+
       .github-button:active,
       .github-button:hover {
       background-color: white;
       background-image: none;
       color: #0080ff;
       }
+
       .github-button:active {
       background-image: linear-gradient(to bottom, #eaeaea, white) !important;
       border-color: gray;
       color: navy !important;
       }
+
       .github-button {
       display: block;
       position: absolute;
@@ -112,8 +142,6 @@
       background-image: linear-gradient(to top, #eaeaea, white);
       color: black;
       }
-
-      
     </style>
     <script src="matomo.js"></script>
   </head>
@@ -121,7 +149,7 @@
   <body>
     <a class="github-button" href="https://github.com/svvvst/wordle_rue">View on GitHub</a>
     <div id="container">
-      <h1>Вордел</h1>
+      <div id=heading-container><h1>Вордел</h1><div id=logo></div></div>
       <script src="main.js"></script>
 
       <div class="guess">
