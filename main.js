@@ -313,6 +313,14 @@ function share(inputGame){
     navigator.clipboard.writeText(shareStr);
 }
 
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
 // TEMPORARY SOLUTION FOR DAILY WORD LIST 
 let d = new Date(); // current date
 var dateStrArr =    // string of dates in text form
@@ -329,7 +337,7 @@ for (var date of dateStrArr){   // for each date string in above array
     wordMap.set(date,wordArr[i_date]);  // add date string/word pair to map
 }
 
-wordToday = wordMap.get(today); // retrieve today's word from map using 'today' date string
+wordToday = httpGet('query.php')//wordMap.get(today); // retrieve today's word from map using 'today' date string
 
 newGame = new Game(wordToday, 6);   // start new game with today's word and 6 rounds 
 
