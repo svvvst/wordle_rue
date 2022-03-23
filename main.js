@@ -321,23 +321,7 @@ function httpGet(theUrl)
     return xmlHttp.responseText;
 }
 
-// TEMPORARY SOLUTION FOR DAILY WORD LIST 
-let d = new Date(); // current date
-var dateStrArr =    // string of dates in text form
-['2022211','2022212','2022213','2022214','2022215','2022216','2022217','2022218','2022219','2022220','2022221','2022222','2022223','2022224','2022225','2022226','2022227','2022228','2022229','2022230']
-var today =         // current date in text form
-''+ d.getUTCFullYear() + (d.getUTCMonth()) + d.getUTCDate();
-var wordArr =       // corresponding words for each date
-['слово','вельо','знати','руска','білый','меджі','школа','свиня','воьна','днесь','русин','новый','поміч','дякую','прошу','буква','земля','сонце','заход','кухня'];
-var wordMap = new Map();    // map to relate dates to words
-
-var i_date = -1;
-for (var date of dateStrArr){   // for each date string in above array
-    i_date++;                   // increment index
-    wordMap.set(date,wordArr[i_date]);  // add date string/word pair to map
-}
-
-wordToday = httpGet('query.php')//wordMap.get(today); // retrieve today's word from map using 'today' date string
+wordToday = httpGet('query.php');
 
 newGame = new Game(wordToday, 6);   // start new game with today's word and 6 rounds 
 
