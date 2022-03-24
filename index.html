@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="rue">
+
 <head>
   <meta charset="utf-8">
   <!--Force Browser to Clear Cache-->
@@ -16,6 +17,23 @@
       --color-right: rgb(41, 168, 37);
       --color-wrong: rgb(236, 53, 53);
       --color-swap: rgb(255, 230, 116);
+
+      --color-accent-light: #0080ff;
+      --color-accent: #005dc7;
+      --color-accent-dark: #204f88;
+      
+      /* Filters for SVG Icons */
+      --filter-accent-light:invert(45%) sepia(60%) saturate(6620%) hue-rotate(197deg) brightness(103%) contrast(106%);
+      --filter-accent-dark:invert(22%) sepia(78%) saturate(957%) hue-rotate(184deg) brightness(96%) contrast(89%);
+
+      --color-border: lightgray;
+      --color-border-dark: gray;
+      --color-tile:rgb(248, 248, 248);
+
+      --gradient-light:linear-gradient(to top, #eaeaea, white);
+      --gradient-light-rev:linear-gradient(to bottom, #eaeaea, white);
+
+      --border-radius: 0.5vh;
     }
 
     * {
@@ -54,16 +72,20 @@
       height: 3.5vh;
       width: 3.5vh;
       color: white;
-      background-color: rgb(42, 121, 194);
-      border-radius: 5px;
+      background-color: var(--color-accent);
+      border-radius: var(--border-radius);
       border: 0px;
       line-height: 120%;
       flex: 0 0 3.5vh;
     }
 
     .button.guess:hover {
-      background-color: rgb(121, 181, 238);
+      background-color: var(--color-accent-light);
       cursor: pointer;
+    }
+
+    .button.guess:active {
+      background-color: var(--color-accent-dark);
     }
 
     input,
@@ -78,14 +100,14 @@
     table {
       border-collapse: separate;
       border-spacing: .75vh;
-      border: 1px solid lightgray;
+      border: 1px solid var(--color-border);
     }
 
     td {
       width: 6vh;
       height: 6vh;
-      background-color: rgb(248, 248, 248);
-      border-radius: .5vh;
+      background-color: var(--color-tile);
+      border-radius: var(--border-radius);
       color: white;
       text-shadow: 0px 0px 20px rgb(122, 115, 46);
     }
@@ -122,16 +144,15 @@
     }
 
     .button.social {
-      border-radius: 5px;
-      border: 1px solid lightgray;
-      border-top-color: lightgray;
-      border-right-color: lightgray;
-      border-bottom-color: lightgray;
-      border-left-color: lightgray;
+      display: flex;
+      align-items: center;
+
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-border);
       padding: .3vh .5vh;
-      background-color: #f8f8f8;
+      background-color: var(--color-tile);
       text-decoration: none;
-      background-image: linear-gradient(to top, #eaeaea, white);
+      background-image: var(--gradient-light);
       color: black;
     }
 
@@ -139,13 +160,26 @@
     .button.social:hover {
       background-color: white;
       background-image: none;
-      color: #0080ff;
+      color: var(--color-accent-light);
     }
 
     .button.social:active {
-      background-image: linear-gradient(to bottom, #eaeaea, white) !important;
-      border-color: gray;
-      color: navy !important;
+      background-image: var(--gradient-light-rev) !important;
+      border-color: var(--color-border-dark);
+      color: var(--color-accent-dark) !important;
+    }
+
+    .icon {
+      padding-right: .5vh;
+      width: 1em;
+    }
+
+    .button.social:hover .icon{
+      filter: var(--filter-accent-light);
+    }
+
+    .button.social:active .icon{
+      filter: var(--filter-accent-dark);
     }
   </style>
   <script src="matomo.js"></script>
@@ -166,8 +200,12 @@
     <button id=share onclick="share(newGame)">Копія резултата</button>
   </div>
   <div id=footer>
-    <a class="social button" title="View on Github" href="https://github.com/svvvst/wordle_rue">Смотрити на GitHub</a>
-    <a class="social button" title="Report Bug" href="https://t.me/+Ogp5VUlf7yI2OTFh">Зголосати блуд</a>
+    <a class="social button" title="View on Github" href="https://github.com/svvvst/wordle_rue">
+      <img class=icon src="images/github.svg" />Смотрити на GitHub
+    </a>
+    <a class="social button" title="Report Bug" href="https://t.me/+Ogp5VUlf7yI2OTFh">
+      <img class=icon src="images/telegram.svg" />Зголосати блуд
+    </a>
   </div>
 </body>
 
