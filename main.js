@@ -307,14 +307,15 @@ function share(inputGame){
             break;
         }
     }
+    
 
     shareStr = "Вордел "+[d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate()].join('-')+'\n'+shareStr
 
     navigator.clipboard.writeText(shareStr);
 }
 
-function httpGet(theUrl)
-{
+// HTTP GET Request Function
+function httpGet(theUrl){
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
