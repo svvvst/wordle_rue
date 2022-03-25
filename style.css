@@ -38,6 +38,9 @@ body > div {
   margin-top: 1.5vh;
 }
 
+
+/* GAME BOARD */
+
 div.guess {
   margin-top: 0.75vh;
   margin-bottom: 0.75vh;
@@ -99,6 +102,9 @@ td {
   text-shadow: 0px 0px 20px rgb(122, 115, 46);
 }
 
+
+/* HEADER and related content */
+
 #heading-container {
   display: flex;
   justify-content: space-between;
@@ -118,6 +124,9 @@ h1 {
   background-size: 5em;
   background-repeat: no-repeat;
 }
+
+
+/* FOOTER and related content */
 
 #footer {
   display: flex block;
@@ -168,6 +177,7 @@ h1 {
   filter: var(--filter-accent-dark);
 }
 
+
 /* Keyboard */
 
 .keyboard {
@@ -175,8 +185,8 @@ h1 {
 }
 
 .key {
-  width: 23px;
-  height: 30px;
+  width: 3vh;
+  height: 3vh;
   margin: 1px;
   padding: 5px;
   border: none;
