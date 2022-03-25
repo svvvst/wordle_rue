@@ -149,6 +149,7 @@ class Board {
 
 class Game {
     debug = false;  // bool value for debugging only
+    debugWordStr = 'слово'; // sets word for running locally without db connection.
 
     answerWord;     // answer to game
 
@@ -164,7 +165,15 @@ class Game {
         this.round = -1;                                // Set round to -1, will increment to 0 on game start.
         this.gameOver = false;
         this.maxRound = maxRound;
-
+        
+        // Code to run if Debugging Locally
+        if (this.debug){ 
+            alert('Debug')
+            inWordStr = this.debugWordStr;
+            console.log(this.inWordStr)
+            document.body.prepend("debug = true; Set debug = false before commit.")
+        }
+             // Code to run without PHP query to mySQL db
         this.answerWord = new Word(inWordStr);          // Take input string and create new instance of above Word class definition
         this.board = new Board(inWordStr, maxRound);    // Create new instance of Board class based on above class definition
     }
@@ -173,9 +182,9 @@ class Game {
     playRound(inputStr) {
         this.round++    // increment current round number (first round will start at 0 from previously set -1)
 
-        // Code for debugging
+        // Code for debugging (auto entry)
         if (this.debug) {
-            inputStr = ['cactus', 'styles', "engine", 'rhrrhh', 'perohy'][this.round]
+            // inputStr = ['cactus', 'styles', "engine", 'rhrrhh', 'perohy'][this.round]
         }
 
         // Convert guess to upper case to avoid issues with comparing guess to answer 
@@ -215,7 +224,6 @@ class Game {
         // Game Win, if guess and answer are equal
         if (this.guessStr == this.answerWord.str) {
             this.win();
-            console.log('win')
         } 
         else { // Game Continue
             let letter;
