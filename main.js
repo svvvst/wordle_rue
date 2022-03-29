@@ -112,28 +112,15 @@ class Board {
     }
 
     // MARK: function to color tile
-    mark(col, row, val) {
-        var color;
-
-        // based on 'val' set color equal to applicable CSS variable (assigned earlier in Board)
-        switch (val) {
-            case 1:
-                color = 'var(--color-right)';
-                break;
-            case 2:
-                color = 'var(--color-swap)';
-                break;
-            default: // if not 1 or 2 then default to --color-wrong
-                color = 'var(--color-wrong)';
-                break;
-        }
-
+    mark(row, col, val) {
+        var selectorStr;
         // This function also allows us to color each tile in a row all at once if 'col' is a string w value 'row'
         if (col == 'row') {
-            style.innerText = style.innerText + ' .r' + row + ' td{background-color:' + color + ' !important;}'       // CSS to color child 'td' elements of row class .rrow
+            selectorStr = ` .r${row} td`       // CSS to color all child 'td' elements of row class .r${row}
         } else {
-            style.innerText = style.innerText + ' .r' + col + ' .tile.c' + row + '{background-color:' + color + ';}'  // otherwise, only color tile with parent .r'Row' and class .c'Col'
+            selectorStr = ` .r${row} .tile.c${col}`  // otherwise, only color tile with parent .r${row} and class .c${col}
         }
+        colorRightWrongSwap(style,selectorStr,val)
     }
 
     // get html elements of all tiles in board 
@@ -147,8 +134,9 @@ class Board {
     }
 }
 
+
 class Game {
-    debug = false;  // bool value for debugging only
+    debug = true;  // bool value for debugging only
     debugWordStr = 'слово'; // sets word for running locally without db connection.
 
     answerWord;     // answer to game
@@ -328,6 +316,25 @@ function httpGet(theUrl){
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
     return xmlHttp.responseText;
+}
+
+// COLOR RIGHT WRONG SWAP: to Set Color of Element if letter is Right, Wrong, or Swap
+function colorRightWrongSwap(styleEl, selectorStr, colorVal){
+    var colorStr;
+
+    // based on 'val' set color equal to applicable CSS variable (assigned earlier in Board)
+    switch (colorVal) {
+        case 1:
+            colorStr = 'var(--color-right)';
+            break;
+        case 2:
+            colorStr = 'var(--color-swap)';
+            break;
+        default: // if not 1 or 2 then default to --color-wrong
+            colorStr = 'var(--color-wrong)';
+            break;
+    }
+        styleEl.innerText += `${selectorStr}{background-color: ${colorStr};}\n`
 }
 
 wordToday = httpGet('query.php');
