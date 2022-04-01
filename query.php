@@ -7,7 +7,9 @@
   $todayStr = $nowDateTime->format("Ymd");
   $todayDate = DateTime::createFromFormat("Ymd",$todayStr);
   $diff = $startDate->diff($todayDate,true);
-  $days = $diff->format("%a");
+
+  $skipDays = 1; // used to skip daily entry if word is uncommon or typo
+  $days = $diff->format("%a") + $skipDays;
 
   // echo $days;
 
