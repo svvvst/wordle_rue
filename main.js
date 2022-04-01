@@ -136,7 +136,7 @@ class Board {
 
 
 class Game {
-    debug = true;  // bool value for debugging only
+    debug = false;  // bool value for debugging only
     debugWordStr = 'слово'; // sets word for running locally without db connection.
 
     answerWord;     // answer to game
