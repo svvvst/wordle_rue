@@ -307,7 +307,7 @@ function share(inputGame){
 
     shareStr = "Вордел "+[d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate()].join('-')+'\n'+shareStr
 
-    navigator.clipboard.writeText(shareStr);
+    copyTextToClipboard(shareStr);
 }
 
 // HTTP GET Request Function
@@ -336,6 +336,25 @@ function colorRightWrongSwap(styleEl, selectorStr, colorVal){
     }
         styleEl.innerText += `${selectorStr}{background-color: ${colorStr};}\n`
 }
+
+// CLIPBOARD FALLBACK
+// source: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript?rq=1
+  
+function copyTextToClipboard(text) {
+    if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(text);
+        return;
+    }
+    navigator.clipboard.writeText(text).then(
+        function(){
+            console.log('Async: Copying to clipboard was successful!');
+        },
+        function(err){
+            console.error('Async: Could not copy text: ', err);
+        }
+    );
+}
+  
 
 wordToday = httpGet('query.php');
 
