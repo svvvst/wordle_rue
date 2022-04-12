@@ -196,7 +196,7 @@ class Game {
 
     // LOSE actions
     lose() {
-        alert('Йой, шкода...');
+        alert('Йой, шкода...\nСлово є «'+this.answerWord.str+'»');
         this.endGame()
     }
 
@@ -211,6 +211,7 @@ class Game {
 
         // Game Win, if guess and answer are equal
         if (this.guessStr == this.answerWord.str) {
+            this.board.mark(this.round, "row", 1)
             this.win();
         } 
         else { // Game Continue
@@ -282,6 +283,7 @@ function share(inputGame){
     var shareStr = '';
     var i = -1;
     var d = new Date
+    var month = 'січен,лютий,марец,квітен,май,червец,липец,серпен,вересен,жолтен,листопад,груден'.split(',')
 
     for (var el of inputGame.board.content()) {
         i++
@@ -305,7 +307,7 @@ function share(inputGame){
     }
     
 
-    shareStr = "Вордел "+[d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate()].join('-')+'\n'+shareStr
+    shareStr = "Вордел "+[month[d.getUTCMonth()],d.getUTCDate()+'ий,',,d.getUTCFullYear()].join(' ')+'\n'+shareStr
 
     copyTextToClipboard(shareStr);
 }
