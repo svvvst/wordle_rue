@@ -283,7 +283,7 @@ function share(inputGame){
     var shareStr = '';
     var i = -1;
     var d = new Date
-    var month = 'січен,лютий,марец,квітен,май,червец,липец,серпен,вересен,жолтен,листопад,груден'.split(',')
+    var month = 'січня,лютого,марця,квітня,мая,червця,липця,серпня,вересня,жолтня,листопада,грудня'.split(',')
 
     for (var el of inputGame.board.content()) {
         i++
@@ -305,9 +305,15 @@ function share(inputGame){
             break;
         }
     }
-    
 
-    shareStr = "Вордел "+[month[d.getUTCMonth()],d.getUTCDate()+'ий,',,d.getUTCFullYear()].join(' ')+'\n'+shareStr
+    // String for Output
+    shareStr = [
+        "Вордел\nза",
+        d.getUTCDate()+'.',
+        month[d.getUTCMonth()],
+        d.getUTCFullYear(), 
+        '\n'+shareStr 
+    ].join(' ')
 
     copyTextToClipboard(shareStr);
 }
