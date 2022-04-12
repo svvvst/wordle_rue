@@ -1,4 +1,6 @@
 :root {
+  --ui-scale:1;
+
   --color-right: rgb(41, 168, 37);
   --color-wrong: rgb(236, 53, 53);
   --color-swap: rgb(255, 230, 116);
@@ -21,6 +23,15 @@
   --gradient-light-rev: linear-gradient(to bottom, #eaeaea, white);
 
   --border-radius: 0.5vh;
+  
+  --key-size:7vw;
+  --key-size-max:7vh;
+}
+
+@media (device-height<device-width){
+  .keyboard{
+    color:red;
+  }
 }
 
 * {
@@ -94,8 +105,8 @@ table {
 }
 
 td {
-  width: 6vh;
-  height: 6vh;
+  width: min(8vh,15vw);
+  height: min(8vh,15vw);
   background-color: var(--color-tile);
   border-radius: var(--border-radius);
   color: white;
@@ -131,9 +142,8 @@ h1 {
 #footer {
   display: flex block;
 
-  position: absolute;
-  right: 2vw;
-  bottom: 2vw;
+  float:right;
+  margin:2vw;
 
   gap: 1em;
 }
@@ -181,23 +191,60 @@ h1 {
 /* Keyboard */
 
 .keyboard {
-  text-align: center;
+  width:100%;
 }
 
 .key {
-  width: 3vh;
-  height: 3vh;
-  margin: 1px;
-  padding: 5px;
-  border: none;
-  border-radius: 10%;
-  font-size: 2vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color:red;
+  width:unset;
+  height: var(--key-size);
+
+  max-width:var(--key-size-max);
+  max-height:var(--key-size-max);
+
+  flex: 0 0 var(--key-size);
+
+  font-size: min(5vw,3vh);
+  line-height:0;
   font-weight: bold;
-  background-color: lightgray;
+  background-color: #eaeaea;
+  
+  border: none;
+  border-radius: var(--border-radius);;
+  
+  cursor: pointer;
 }
 
+.key:hover{
+  background-color:lightgray;
+}
+
+.key:active{
+  background-color:gray;
+}
+
+.keyboard div{
+  display:flex;
+  flex-flow:row nowrap;
+  justify-content:center;
+  gap:0.5vw;
+
+  height:100%;
+
+  margin:0;
+}
+
+.keyboard div:nth-child(2){
+    margin:var(--border-radius) 0;
+  }
+
 #backspace {
-  width: 36px;
+  flex: 0 0 calc(1.66*var(--key-size));
+  max-width: calc(1.66*var(--key-size-max));
 }
 
 .key.right {

@@ -7,7 +7,7 @@ function buildKeyboard(layout) {
     row.forEach((letter) => {
       if (letter) {
         if (letter === "backspace") {
-          keyboard += `<button class="key" id="backspace">⇦</button>`;
+          keyboard += `<button class="key" id="backspace">⬅</button>`;
         } else {
           keyboard += `<button class="key" data-letter=${letter}>${letter}</button>`;
         }
