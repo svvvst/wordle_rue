@@ -225,6 +225,7 @@ class Game {
                 // if letterMap in answer does not contain 'letter', the letter is wrong
                 if (!(this.answerWord.letterMap.has(letter))) {
                     this.board.mark(this.round, letterIndex, 0); // mark wrong
+                    keyMark(letter, "wrong");
                 }
 
                 // if letter not wrong
@@ -238,6 +239,7 @@ class Game {
                     // check if letter index correct
                     if (letter == this.answerWord.str[letterIndex]) {
                         this.board.mark(this.round, letterIndex, 1);    // mark correct
+                        keyMark(letter, "right");
                         guessMap.set(letter, guessMap.get(letter)+1);   // increment correct letter count for guessMap[letter]
                     }
                     else { // otherwise, set index aside to check against letter count
@@ -260,6 +262,7 @@ class Game {
                     // and if letter count is less than/equals that letter in answer
                     if (guessMap.get(letter) <= this.answerWord.letterMap.get(letter).size) {
                         this.board.mark(this.round, letterIndex, 2);    // mark as wrong position
+                        keyMark(letter, "swap");
                     } else {
                         this.board.mark(this.round, letterIndex, 0);    // otherwise, there are too many of that letter -> wrong
                     }
