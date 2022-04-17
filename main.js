@@ -136,7 +136,6 @@ class Board {
 
 
 class Game {
-    debug = false;  // bool value for debugging only
     debugWordStr = 'слово'; // sets word for running locally without db connection.
 
     answerWord;     // answer to game
@@ -149,10 +148,11 @@ class Game {
 
     gameOver;       // boolean indicating game is over
 
-    constructor(inWordStr, maxRound) {
+    constructor(inWordStr, maxRound, debug = false) {
         this.round = -1;                                // Set round to -1, will increment to 0 on game start.
         this.gameOver = false;
         this.maxRound = maxRound;
+        this.debug = debug; // bool value for debugging only (false by default)
         
         // Code to run if Debugging Locally
         if (this.debug){ 
@@ -361,9 +361,17 @@ function copyTextToClipboard(text) {
 }
   
 
-wordToday = httpGet('query.php');
+try {
+  wordToday = httpGet("query.php");
+} catch {
+  wordToday = null;
+}
 
-newGame = new Game(wordToday, 6);   // start new game with today's word and 6 rounds 
+if (wordToday) {
+  newGame = new Game(wordToday, 6); // start new game with today's word and 6 rounds
+} else {
+  newGame = new Game(wordToday, 6, true); // run in debug mode
+}
 
 var x = 0; // no use just for setting breakpoints
 
