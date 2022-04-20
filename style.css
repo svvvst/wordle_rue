@@ -249,12 +249,15 @@ h1 {
 
 .key.wrong {
   background-color: var(--color-wrong);
+  color:darkred;
 }
 
 .key.swap {
   background-color: var(--color-swap);
+  color:darkgoldenrod;
 }
 
 .key.right {
   background-color: var(--color-right);
+  color:darkgreen;
 }
