@@ -247,14 +247,14 @@ h1 {
   max-width: calc(1.66*var(--key-size-max));
 }
 
-.key.right {
-  background-color: var(--color-right);
-}
-
 .key.wrong {
   background-color: var(--color-wrong);
 }
 
 .key.swap {
   background-color: var(--color-swap);
+}
+
+.key.right {
+  background-color: var(--color-right);
 }
