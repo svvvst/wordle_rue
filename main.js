@@ -136,7 +136,6 @@ class Board {
 
 
 class Game {
-    debug = false;  // bool value for debugging only
     debugWordStr = 'слово'; // sets word for running locally without db connection.
 
     answerWord;     // answer to game
@@ -149,10 +148,11 @@ class Game {
 
     gameOver;       // boolean indicating game is over
 
-    constructor(inWordStr, maxRound) {
+    constructor(inWordStr, maxRound, debug = false) {
         this.round = -1;                                // Set round to -1, will increment to 0 on game start.
         this.gameOver = false;
         this.maxRound = maxRound;
+        this.debug = debug; // bool value for debugging only (false by default)
         
         // Code to run if Debugging Locally
         if (this.debug){ 
@@ -225,6 +225,7 @@ class Game {
                 // if letterMap in answer does not contain 'letter', the letter is wrong
                 if (!(this.answerWord.letterMap.has(letter))) {
                     this.board.mark(this.round, letterIndex, 0); // mark wrong
+                    keyMark(letter, "wrong");
                 }
 
                 // if letter not wrong
@@ -238,6 +239,7 @@ class Game {
                     // check if letter index correct
                     if (letter == this.answerWord.str[letterIndex]) {
                         this.board.mark(this.round, letterIndex, 1);    // mark correct
+                        keyMark(letter, "right");
                         guessMap.set(letter, guessMap.get(letter)+1);   // increment correct letter count for guessMap[letter]
                     }
                     else { // otherwise, set index aside to check against letter count
@@ -260,6 +262,7 @@ class Game {
                     // and if letter count is less than/equals that letter in answer
                     if (guessMap.get(letter) <= this.answerWord.letterMap.get(letter).size) {
                         this.board.mark(this.round, letterIndex, 2);    // mark as wrong position
+                        keyMark(letter, "swap");
                     } else {
                         this.board.mark(this.round, letterIndex, 0);    // otherwise, there are too many of that letter -> wrong
                     }
@@ -283,7 +286,7 @@ function share(inputGame){
     var shareStr = '';
     var i = -1;
     var d = new Date
-    var month = 'січен,лютий,марец,квітен,май,червец,липец,серпен,вересен,жолтен,листопад,груден'.split(',')
+    var month = 'січня,лютого,марця,квітня,мая,червця,липця,серпня,вересня,жолтня,листопада,грудня'.split(',')
 
     for (var el of inputGame.board.content()) {
         i++
@@ -305,9 +308,15 @@ function share(inputGame){
             break;
         }
     }
-    
 
-    shareStr = "Вордел "+[month[d.getUTCMonth()],d.getUTCDate()+'ий,',,d.getUTCFullYear()].join(' ')+'\n'+shareStr
+    // String for Output
+    shareStr = [
+        "Вордел\nза",
+        d.getUTCDate()+'.',
+        month[d.getUTCMonth()],
+        d.getUTCFullYear(), 
+        '\n'+shareStr 
+    ].join(' ')
 
     copyTextToClipboard(shareStr);
 }
@@ -358,9 +367,17 @@ function copyTextToClipboard(text) {
 }
   
 
-wordToday = httpGet('query.php');
+try {
+  wordToday = httpGet("query.php");
+} catch {
+  wordToday = null;
+}
 
-newGame = new Game(wordToday, 6);   // start new game with today's word and 6 rounds 
+if (wordToday) {
+  newGame = new Game(wordToday, 6); // start new game with today's word and 6 rounds
+} else {
+  newGame = new Game(wordToday, 6, true); // run in debug mode
+}
 
 var x = 0; // no use just for setting breakpoints
 

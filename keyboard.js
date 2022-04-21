@@ -35,6 +35,14 @@ function keyPress(event) {
   }
 }
 
+function keyMark(letter, result) {
+  // result must be "right", "wrong" or "swap"
+  const key = document.querySelector(`button[data-letter=${letter}]`);
+  if (key) {
+    key.classList.add(result);
+  }
+}
+
 // layout with "false" for unused keyboard positions
 const layout = [
   ["Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ы"],
