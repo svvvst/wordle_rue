@@ -315,7 +315,7 @@ function share(inputGame){
         d.getUTCDate()+'.',
         month[d.getUTCMonth()],
         d.getUTCFullYear(), 
-        '\n'+shareStr 
+        '\nhttps://rusynpedia.dreamhosters.com/wordle/'+shareStr 
     ].join(' ')
 
     copyTextToClipboard(shareStr);
