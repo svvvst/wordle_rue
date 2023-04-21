@@ -3,9 +3,7 @@ A [Rusyn-language](https://en.wikipedia.org/wiki/Rusyn_language) Wordle clone. W
 
 [Play here](https://rusynpedia.dreamhosters.com/wordle/).
 
-# Wordle Project Roadmap: Rusyn Language Edition
-
-# Roadmap
+## Roadmap
 
 ### Phase 1: Core Functionality
 
